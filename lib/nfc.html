@@ -1,0 +1,161 @@
+<!--
+  Copyright 2014-2015 MCQN Ltd.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<script type="text/x-red" data-template-name="rpi-rfid in">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="rpi-rfid in">
+    <p>RFID input node. Generates a <b>msg.payload</b> with the ID of the card whenever one is detected.</p>
+    <p><b>Note:</b> This node currently polls the pin every 250mS. This is not ideal as it loads the cpu, and will be rewritten shortly to try to use interrupts.</p>
+
+</script>
+
+<script type="text/x-red" data-template-name="rpi-rfid write">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="rpi-rfid write">
+    <p>RFID write block node. Expects a msg containing msg.block and msg.payload.  Writes the data in msg.payload into the block number from msg.block on the tag currently on the RFID reader.</p>
+</script>
+
+<script type="text/x-red" data-template-name="rpi-rfid read">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="rpi-rfid read">
+    <p>RFID read block node. Takes a <b>msg.payload</b> with the number of a block to read from the tag currently on the RFID reader and outputs a msg with msg.payload of the data in that block.</p>
+</script>
+
+<script type="text/x-red" data-template-name="rpi-rfid read-ndef">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="rpi-rfid read-ndef">
+    <p>RFID read NDEF records node. Reads any NDEF records from the tag currently on the RFID reader and outputs a msg for each record found.</p>
+</script>
+
+<script type="text/x-red" data-template-name="rpi-rfid write-ndef">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="rpi-rfid write-ndef">
+    <p>RFID write block node. Expects a msg containing a msg.payload.  Writes the NDEF messages in msg.payload onto the tag currently on the RFID reader.  The NDEF messages are type "{ type: "Sp", value: "http://mcqn.com/"}" for a URL message, or "{ type: "T", value: "text goes here"}" for a text message.</p>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('rpi-rfid in',{
+        category: 'advanced-input',
+        color:"#c6dbef",
+        defaults: {
+            name: { value:"" },
+        },
+        inputs:0,
+        outputs:1,
+        icon: "rpi.png",
+        label: function() {
+            return this.name||"RFID";
+        },
+        labelStyle: function() {
+            return this.name?"node_label_italic":"";
+        }
+    });
+
+    RED.nodes.registerType('rpi-rfid read',{
+        category: 'advanced-input',
+        color:"#c6dbef",
+        defaults: {
+            name: { value:"" },
+        },
+        inputs:1,
+        outputs:1,
+        icon: "rpi.png",
+        label: function() {
+            return this.name||"RFID Read";
+        },
+        labelStyle: function() {
+            return this.name?"node_label_italic":"";
+        }
+    });
+
+    RED.nodes.registerType('rpi-rfid write',{
+        category: 'advanced-input',
+        color:"#c6dbef",
+        defaults: {
+            name: { value:"" },
+        },
+        inputs:1,
+        outputs:1,
+        icon: "rpi.png",
+        label: function() {
+            return this.name||"RFID Write";
+        },
+        labelStyle: function() {
+            return this.name?"node_label_italic":"";
+        }
+    });
+
+    RED.nodes.registerType('rpi-rfid read-ndef',{
+        category: 'advanced-input',
+        color:"#c6dbef",
+        defaults: {
+            name: { value:"" },
+        },
+        inputs:1,
+        outputs:1,
+        icon: "rpi.png",
+        label: function() {
+            return this.name||"Read NDEF";
+        },
+        labelStyle: function() {
+            return this.name?"node_label_italic":"";
+        }
+    });
+
+    RED.nodes.registerType('rpi-rfid write-ndef',{
+        category: 'advanced-input',
+        color:"#c6dbef",
+        defaults: {
+            name: { value:"" },
+        },
+        inputs:1,
+        outputs:1,
+        icon: "rpi.png",
+        label: function() {
+            return this.name||"Write NDEF";
+        },
+        labelStyle: function() {
+            return this.name?"node_label_italic":"";
+        }
+    });
+</script>
+
+

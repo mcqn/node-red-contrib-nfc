@@ -1,0 +1,44 @@
+{
+  "name": "node-red-contrib-nfc",
+  "description": "SL030 RFID/NFC reader node for Node RED on a Raspberry Pi",
+  "keywords": [
+    "node-red",
+    "rfid",
+    "nfc",
+    "i2c",
+    "raspberry pi"
+  ],
+  "version": "0.0.7",
+  "author": {
+    "name": "MCQN Ltd",
+    "email": "adrianm@mcqn.com",
+    "url": "http://www.mcqn.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mcqn/node-red-contrib-nfc.git"
+  },
+  "node-red": {
+    "nodes": {
+      "nfc": "lib/nfc.js"
+    }
+  },
+  "dependencies": {
+    "rfid-sl030": "~0.0.7",
+    "ndef": "~0.1.2"
+  },
+  "bugs": {
+    "url": "https://github.com/mcqn/node-red-contrib-nfc/issues"
+  },
+  "homepage": "https://github.com/mcqn/node-red-contrib-nfc",
+  "_npmUser": {
+    "name": "amcewen",
+    "email": "info@mcqn.com"
+  },
+  "maintainers": [
+    {
+      "name": "amcewen",
+      "email": "info@mcqn.com"
+    }
+  ]
+}
